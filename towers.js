@@ -20,7 +20,6 @@ var makeGame = function(){
 
     victory: function(){
       if(this.t2.isFull() || this.t3.isFull()){
-        console.log("VICTORY")
         return true;
       }
       else{
@@ -29,28 +28,25 @@ var makeGame = function(){
     },
 
     makeMove: function(fromTower, toTower){
-      disc = fromTower.removeDisc(); // false or disc
+      var disc = fromTower.removeDisc(); // false or disc
       if(disc){
         if(toTower.addDisc(disc)){
           this.victory();
-          return true;
         }
         else{
-          console.log("FAILURE: couldn't add disc");
           fromTower.addDisc(disc);
-          return false;
+          throw("FAILURE: couldn't add disc");
         }
       }
       else{
-        console.log("FAILURE: Invalid from tower");
-        return false;
+        throw("FAILURE: Invalid from tower");
       }
     },
 
     printTowers: function(){
-      console.log("*******");
-      this.towers.forEach(function(el){
-        console.log(el.discs);
+      println("*******");
+      this.towers.forEach(function(el, ind){
+        println("Tower"+ind+" "+el.discs);
       });
     }
   }
@@ -75,9 +71,11 @@ var makeTowerObj = function(discs){
     },
     removeDisc: function(){
       if(discs.length == 0){
+        console.log("BAD LENGTH")
         return false;
       }
       else{
+        console.log("GOOD LENGTH")
         return discs.pop();
       }
     },
@@ -87,10 +85,20 @@ var makeTowerObj = function(discs){
   };
 };
 
-
-
-// EXPORT MODULE *************************
-module.exports = {
-  makeTowerObj: makeTowerObj,
-  makeGame: makeGame
+function println(string) {
+  // we'll learn about this when we talk about DOM manipulation.
+  $('.output').append(string);
+  $('.output').append("\n");
 }
+
+function clear() {
+  $('.output').html("");
+}
+
+println("Loaded it up!");
+
+// // EXPORT MODULE *************************
+// module.exports = {
+//   makeTowerObj: makeTowerObj,
+//   makeGame: makeGame
+// }
