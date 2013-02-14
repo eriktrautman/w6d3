@@ -1,10 +1,48 @@
 <html>
 <head>
+  <!-- TODO float boxes -->
+  <style>
+    .box{
+      width: 100px;
+      height: 100px;
+      display: inline-block;
+      background-color: #f00;
+      border: 2px solid black;
+      box-shadow: 10px 5px 5px #888888;
+    }
+
+    .board{
+      width: 325px;
+      margin: auto;
+    }
+
+    .player{
+      text-align: center;
+    }
+
+    .button{
+      color: white;
+      background-color: blue;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="board">
+  <h1 class="player"></h1>
   <pre class="output"></pre>
-
+  <div class="box" id="b00"></div>
+  <div class="box" id="b01"></div>
+  <div class="box" id="b02"></div><br/>
+  <div class="box" id="b10"></div>
+  <div class="box" id="b11"></div>
+  <div class="box" id="b12"></div><br/>
+  <div class="box" id="b20"></div>
+  <div class="box" id="b21"></div>
+  <div class="box" id="b22"></div><br/>
+  <div class="button"></div>
+  </div>
   <script type="text/javascript" src="./jquery-1.9.1.js"></script>
   <script type="text/javascript" src="./tictactoe.js"></script>
   <script type="text/javascript" src="./tictactest.js"></script>
