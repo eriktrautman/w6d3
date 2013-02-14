@@ -39,6 +39,7 @@ var makeSnakeGame = function(size){
     board: null,
     snake: null,
     food: false,
+    speed: 100,
 
     makeBoard: function(){
       this.board = new Array(this.size);
@@ -94,22 +95,44 @@ var makeSnake = function(size, board, game){
     game: game,
     extend: false,
 
+    changeDirection: function(newDir){
+      //console.log(this);
+      //console.log("CHANGING from " + this.direction + " to " + newDir + " and this is " + this);
+      switch(this.direction)
+      {
+        case "right": 
+          newDir == "left" ? '': this.direction = newDir;
+          break;
+        case "left": 
+          newDir == "right" ? '': this.direction = newDir;
+          break;
+        case "up": 
+          newDir == "down" ? '': this.direction = newDir;
+          break;
+        case "down": 
+          newDir == "up" ? '': this.direction = newDir;
+          break;
+      }
+      console.log("jsut switched to " + this.direction);
+    },
+
     moveSnake: function(){
+      //console.log(this); 
       head = this.body[(this.body.length)-1];
       newHead = null;
       switch(this.direction)
       {
         case "right":
-          newHead = this.validate([head[0], (head[1]+1)])
+          newHead = this.validate([head[0], (head[1]+1)]);
           break;
         case "left":
-          newHead = this.validate([head[0], (head[1]-1)])
+          newHead = this.validate([head[0], (head[1]-1)]);
           break;
         case "up":
-          newHead = this.validate([head[0]-1, (head[1])])
+          newHead = this.validate([head[0]-1, (head[1])]);
           break;
         case "down":
-          newHead = this.validate([head[0]+1, (head[1])])
+          newHead = this.validate([head[0]+1, (head[1])]);
           break;
       }
       this.body.push(newHead);
