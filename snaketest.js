@@ -1,4 +1,4 @@
-var printBoard = function(board){
+var printBoardASCII = function(board){
   for(var x = 0; x < board.length; x++){
     $('.output').append("* ");
   }
@@ -25,6 +25,26 @@ var printBoard = function(board){
   $('.output').append("**");
 };
 
+var printBoardWEB = function(board){
+  $('.wrapper').html("");
+  // set width of wrapper
+  //$('.wrapper').css({"width":})
+  for(var i = 0; i < board.length; i++){
+    for(var j = 0; j < board.length; j++){
+      if(board[i][j] == "o"){
+        $('.wrapper').append("<div class='tile snake'><img src='./snakehead.png' /></div>");
+      }
+      else if(board[i][j] == "~"){
+        $('.wrapper').append("<div class='tile food'><img src='./mouse.png' /></div>");
+      }
+      else{
+        $('.wrapper').append("<div class='tile empty'></div>");
+      }
+    }
+    $('.wrapper').append("<div class='clear'></div>");
+  }
+}
+
 var go = function(){
   var difficulty = 9/10;
   var speed = 600 * Math.pow((difficulty), sg.snake.body.length);
@@ -39,7 +59,7 @@ var go = function(){
     clearInterval(gameLoop);
   }
   $('.score').html("Score: " + Math.round(Math.pow(1/difficulty,(sg.snake.body.length-1))*100-100));
-  printBoard(sg.board);
+  printBoardWEB(sg.board);
 };
 
 function checkKey(e){
