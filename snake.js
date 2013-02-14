@@ -5,7 +5,6 @@
   // surround it all in while loop
   // declare death
   // show score
-  // make food re-appear
 
 
 // Shit we don't know:
@@ -120,19 +119,18 @@ var makeSnake = function(size, board, game){
         oldTail = this.body.shift();
         this.board[oldTail[0]][oldTail[1]] = undefined;
       }else{
+        this.game.food = false;
         this.extend = false;
       }
     },
 
     // validates a proposed snake move, returns coords if valid
     validate: function(coords){
-      console.log(coords);
       if( coords[0] < 0 ||
           coords[0] >= this.board.length ||
           coords[1] < 0 ||
           coords[1] >= this.board.length
       ){
-        console.log("YOU LOSE, SUCKA!!!!");
         loseGame();
         return false;
       }
@@ -154,8 +152,7 @@ var makeSnake = function(size, board, game){
 };
 
 var loseGame = function(){
-  console.log("YOU LOSE, SUCKA!!!!");
-  return false;
+  throw "YOU LOST, DUDE!";
 }
 
 
