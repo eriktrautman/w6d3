@@ -5,7 +5,7 @@ var printBoard = function(board){
   $('.output').append("**\n");
 
   for(var i = 0; i < board.length; i++){
-    $('.output').append("*"); 
+    $('.output').append("*");
     for(var j = 0; j < board.length; j++){
       if(board[i][j] == "o"){
         $('.output').append(" o");
@@ -26,16 +26,19 @@ var printBoard = function(board){
 };
 
 var go = function(){
+  var difficulty = 9/10;
+  var speed = 600 * Math.pow((difficulty), sg.snake.body.length);
   $('.output').html("");
   try{
     sg.iterateGame();
+    gameLoop = setTimeout(function(){ go() }, speed);
   }
   catch(error){
     console.log(error);
     $('.gameover').html("OH NO, YOU LOST!!! ");
-    clearInterval(interval);
+    clearInterval(gameLoop);
   }
-  $('.score').html("Score: " + sg.snake.body.length*100);
+  $('.score').html("Score: " + Math.round(Math.pow(1/difficulty,(sg.snake.body.length-1))*100-100));
   printBoard(sg.board);
 };
 
@@ -65,7 +68,8 @@ function checkKey(e){
 sg = makeSnakeGame(15);
 sg.initialize();
 document.onkeydown = checkKey;
-interval = setInterval(function(){go(sg);}, 100);
+go();
+//interval = setInterval(function(){go(sg);}, 100);
 
 
 
